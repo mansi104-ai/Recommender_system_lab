@@ -1,0 +1,289 @@
+{{short description|Recurrent neural network architecture}}
+{{redirect|LSTM}}
+{{Technical|date=March 2022}}
+{{Machine learning|Artificial neural network}}
+[[File:NN LSTM-Cell v2.svg|thumb|300x300px|The long short-term memory (LSTM) cell can process data sequentially and keep its hidden state through time.]]
+'''Long short-term memory''' ('''LSTM''')<ref name="lstm1997" /> is a type of [[recurrent neural network]] (RNN) aimed at mitigating the [[vanishing gradient problem]]<ref name="hochreiter1991" /> commonly encountered by traditional RNNs. Its relative insensitivity to gap length is its advantage over other RNNs, [[hidden Markov models]], and other sequence learning methods. It aims to provide a short-term memory for RNN that can last thousands of timesteps (thus "''long'' short-term memory").<ref name="lstm1997" /> The name is made in analogy with [[long-term memory]] and [[short-term memory]] and their relationship, studied by cognitive psychologists since the early 20th century.
+
+An LSTM unit is typically composed of a cell and three [[Gating mechanism|gates]]: an input gate, an output gate,<ref name="hochreiter1996">{{Cite journal |last1=Hochreiter |first1=Sepp |last2=Schmidhuber |first2=Jürgen |date=1996-12-03 |title=LSTM can solve hard long time lag problems |url=https://dl.acm.org/doi/10.5555/2998981.2999048 |journal=Proceedings of the 9th International Conference on Neural Information Processing Systems |series=NIPS'96 |location=Cambridge, MA, USA |publisher=MIT Press |pages=473–479 }}</ref> and a forget gate.<ref name="lstm2000" /> The cell remembers values over arbitrary time intervals, and the gates regulate the flow of information into and out of the cell. Forget gates decide what information to discard from the previous state, by mapping the previous state and the current input to a value between 0 and 1. A (rounded) value of 1 signifies retention of the information, and a value of 0 represents discarding. Input gates decide which pieces of new information to store in the current cell state, using the same system as forget gates. Output gates control which pieces of information in the current cell state to output, by assigning a value from 0 to 1 to the information, considering the previous and current states. Selectively outputting relevant information from the current state allows the LSTM network to maintain useful, long-term dependencies to make predictions, both in current and future time-steps.
+
+LSTM has wide applications in [[Classification in machine learning|classification]],<ref name="graves2006" /><ref>{{Cite journal |last1=Karim |first1=Fazle |last2=Majumdar |first2=Somshubra |last3=Darabi |first3=Houshang |last4=Chen |first4=Shun |date=2018 |title=LSTM Fully Convolutional Networks for Time Series Classification |journal=IEEE Access |volume=6 |pages=1662–1669 |doi=10.1109/ACCESS.2017.2779939 |issn=2169-3536|arxiv=1709.05206 |bibcode=2018IEEEA...6.1662K }}</ref> [[data processing]], [[time series]] analysis tasks,<ref name="wierstra2005" /> [[speech recognition]],<ref name="sak2014">{{Cite web |last1=Sak |first1=Hasim |last2=Senior |first2=Andrew |last3=Beaufays |first3=Francoise |date=2014 |title=Long Short-Term Memory recurrent neural network architectures for large scale acoustic modeling |url=https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43905.pdf |url-status=dead |archive-url=https://web.archive.org/web/20180424203806/https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43905.pdf |archive-date=2018-04-24}}</ref><ref name="liwu2015">{{cite arXiv |eprint=1410.4281 |class=cs.CL |first1=Xiangang |last1=Li |first2=Xihong |last2=Wu |title=Constructing Long Short-Term Memory based Deep Recurrent Neural Networks for Large Vocabulary Speech Recognition |date=2014-10-15}}</ref>  [[machine translation]],<ref name="GoogleTranslate">{{cite arXiv |eprint=1609.08144 |class=cs.CL |first1=Yonghui |last1=Wu |first2=Mike |last2=Schuster |title=Google's Neural Machine Translation System: Bridging the Gap between Human and Machine Translation |date=2016-09-26 |last7=Krikun |last4=Le |first4=Quoc V. |last5=Norouzi |first5=Mohammad |last6=Macherey |last9=Gao |first3=Zhifeng |first7=Maxim |first8=Yuan |first9=Qin |last8=Cao |last3=Chen |first6=Wolfgang}}</ref><ref name="FacebookTranslate">{{Cite web |last=Ong |first=Thuy |date=4 August 2017 |title=Facebook's translations are now powered completely by AI |url=https://www.theverge.com/2017/8/4/16093872/facebook-ai-translations-artificial-intelligence |access-date=2019-02-15 |website=www.allthingsdistributed.com}}</ref> speech activity detection,<ref>{{cite arXiv |eprint=1911.02388 |class=eess.AS |first1=Md |last1=Sahidullah |first2=Jose |last2=Patino |title=The Speed Submission to DIHARD II: Contributions & Lessons Learned |date=2019-11-06 |last3=Cornell |first3=Samuele |last4=Yin |first4=Ruiking |last5=Sivasankaran |first5=Sunit |last6=Bredin |first6=Herve |last7=Korshunov |first7=Pavel |last8=Brutti |first8=Alessio |last9=Serizel |first9=Romain |last10=Vincent |first10=Emmanuel |last11=Evans |first11=Nicholas |last12=Marcel |first12=Sebastien |last13=Squartini |first13=Stefano |last14=Barras |first14=Claude}}</ref> [[robot control]],<ref name="mayer2006" /><ref name="OpenAIhand">{{Cite news |date=July 30, 2018 |title=Learning Dexterity |url=https://openai.com/research/learning-dexterity/ |access-date=2023-06-28 |work=OpenAI}}</ref> [[video game]]s,<ref name="OpenAIfive">{{Cite news |last=Rodriguez |first=Jesus |date=July 2, 2018 |title=The Science Behind OpenAI Five that just Produced One of the Greatest Breakthrough in the History of AI |url=https://towardsdatascience.com/the-science-behind-openai-five-that-just-produced-one-of-the-greatest-breakthrough-in-the-history-b045bcdc2b69 |url-status=dead |archive-url=https://web.archive.org/web/20191226222000/https://towardsdatascience.com/the-science-behind-openai-five-that-just-produced-one-of-the-greatest-breakthrough-in-the-history-b045bcdc2b69?gi=24b20ef8ca3f |archive-date=2019-12-26 |access-date=2019-01-15 |work=Towards Data Science}}</ref><ref name="alphastar">{{Cite news |last=Stanford |first=Stacy |date=January 25, 2019 |title=DeepMind's AI, AlphaStar Showcases Significant Progress Towards AGI |url=https://medium.com/mlmemoirs/deepminds-ai-alphastar-showcases-significant-progress-towards-agi-93810c94fbe9 |access-date=2019-01-15 |work=Medium ML Memoirs}}</ref> [[healthcare]],<ref name="decade2022">{{Cite news |last=Schmidhuber |first=Jürgen |date=2021 |title=The 2010s: Our Decade of Deep Learning / Outlook on the 2020s |url=https://people.idsia.ch/~juergen/2010s-our-decade-of-deep-learning.html |access-date=2022-04-30 |work=AI Blog |location=IDSIA, Switzerland}}</ref> [[Energy forecasting|energy forecasting]].<ref name="AMVT">{{cite arXiv|last1=Maity |first1=Abhishek |last2=Tukarul |first2=Viraj |title=Forecasting Energy Consumption using Recurrent Neural Networks: A Comparative Analysis |date=23 January 2026 |class=cs.CY |eprint=2601.17110}}</ref>
+
+== Motivation ==
+In theory, classic [[Recurrent neural network|RNNs]] can keep track of arbitrary long-term dependencies in the input sequences. The problem with classic RNNs is computational (or practical) in nature: when training a classic RNN using [[back-propagation]], the long-term gradients which are back-propagated can [[Vanishing gradient problem|"vanish"]], meaning they can tend to zero due to very small numbers creeping into the computations, causing the model to effectively stop learning. RNNs using LSTM units partially solve the [[vanishing gradient problem]], because LSTM units allow gradients to also flow with little to no attenuation. However, LSTM networks can still suffer from the exploding gradient problem.<ref name="calin2020">{{cite book |last1=Calin |first1=Ovidiu |title=Deep Learning Architectures |date=14 February 2020 |publisher=Springer Nature |location=Cham, Switzerland |isbn=978-3-030-36720-6 |page=555}}</ref>
+
+The intuition behind the LSTM architecture is to create an additional module in a neural network that learns when to remember and when to forget pertinent information.<ref name="lstm2000"/> In other words, the network effectively learns which information might be needed later on in a sequence and when that information is no longer needed. For instance, in the context of [[natural language processing]], the network can learn grammatical dependencies.<ref name="LakretzKruszewskiDesbordes2019">{{citation | last1 = Lakretz | first1 = Yair | last2 = Kruszewski | first2 = German | last3 = Desbordes | first3 = Theo | last4 = Hupkes | first4 = Dieuwke | last5 = Dehaene | first5 = Stanislas | last6 = Baroni | first6 = Marco | title = The emergence of number and syntax units | chapter = The emergence of number and syntax units in | date = 2019 | pages = 11–20 | publisher = Association for Computational Linguistics | doi = 10.18653/v1/N19-1002 | hdl = 11245.1/16cb6800-e10d-4166-8e0b-fed61ca6ebb4 | s2cid = 81978369 | url = https://pure.uva.nl/ws/files/49723040/N19_1002.pdf | chapter-url = https://aclanthology.org/N19-1002/}}</ref> An LSTM might process the sentence "<u>Dave</u>, as a result of <u>his</u> controversial claims, <u>is</u> now a pariah" by remembering the (statistically likely) grammatical gender and number of the subject ''Dave''. Note that this information is pertinent for the pronoun ''his'' and note that this information is no longer important after the verb ''is''.
+
+== Variants ==
+In the equations below, the lowercase variables represent vectors. Matrices <math>W_q</math> and <math>U_q</math> contain, respectively, the weights of the input and recurrent connections, where the subscript <math>_q</math> can either be the input gate <math>i</math>, output gate <math>o</math>, the forget gate <math>f</math> or the memory cell <math>c</math>, depending on the activation being calculated. In this section, we are thus using a "vector notation". So, for example, <math>c_t \in \mathbb{R}^{h}</math> is not just one unit of one LSTM cell, but contains <math>h</math> LSTM cell's units.
+
+=== LSTM with a forget gate ===
+The compact forms of the equations for the forward pass of an LSTM cell with a forget gate are:<ref name="lstm1997" /><ref name="lstm2000">{{Cite journal 
+ | author = Felix A. Gers
+ | author2 = Jürgen Schmidhuber
+ | author3 = Fred Cummins
+ | title = Learning to Forget: Continual Prediction with LSTM
+ | journal = [[Neural Computation (journal)|Neural Computation]]
+ | volume = 12
+ | issue = 10
+ | pages = 2451–2471
+ | year = 2000
+ | doi=10.1162/089976600300015015
+| pmid = 11032042
+ | citeseerx = 10.1.1.55.5709
+ | s2cid = 11598600
+ }}</ref>
+
+:<math>
+\begin{align}
+f_t &= \sigma_g(W_{f} x_t + U_{f} h_{t-1} + b_f) \\
+i_t &= \sigma_g(W_{i} x_t + U_{i} h_{t-1} + b_i) \\
+o_t &= \sigma_g(W_{o} x_t + U_{o} h_{t-1} + b_o) \\
+\tilde{c}_t &= \sigma_c(W_{c} x_t + U_{c} h_{t-1} + b_c) \\
+c_t &= f_t \odot c_{t-1} + i_t \odot \tilde{c}_t \\
+h_t &= o_t \odot \sigma_h(c_t)
+\end{align}
+</math>
+
+where the initial values are <math>c_0 = 0</math> and <math>h_0 = 0</math> and the operator <math>\odot</math> denotes the [[Hadamard product (matrices)|Hadamard product]] (element-wise product). The subscript <math>t</math> indexes the time step.
+
+==== Variables ====
+Letting the superscripts <math>d</math> and <math>h</math> refer to the number of input features and number of hidden units, respectively:
+*<math>x_t \in \mathbb{R}^{d}</math>: input vector to the LSTM unit
+*<math>f_t \in {(0,1)}^{h}</math>: forget gate's activation vector
+*<math>i_t \in {(0,1)}^{h}</math>: input/update gate's activation vector
+*<math>o_t \in {(0,1)}^{h}</math>: output gate's activation vector
+*<math>h_t \in {(-1,1)}^{h}</math>: hidden state vector also known as output vector of the LSTM unit
+*<math>\tilde{c}_t \in {(-1,1)}^{h}</math>: cell input activation vector
+*<math>c_t \in \mathbb{R}^{h}</math>: cell state vector
+*<math>W \in \mathbb{R}^{h \times d}</math>, <math>U \in \mathbb{R}^{h \times h} </math> and <math>b \in \mathbb{R}^{h}</math>: weight matrices and bias vector parameters which need to be learned during training
+
+==== [[Activation function]]s ====
+* <math>\sigma_g</math>: [[sigmoid function]].
+* <math>\sigma_c</math>: [[hyperbolic tangent]] function.
+* <math>\sigma_h</math>: hyperbolic tangent function or, as the peephole LSTM paper<ref name="peepholeLSTM"/><ref name="peephole2002"/> suggests, <math>\sigma_h(x) = x</math>.
+
+=== Peephole LSTM ===
+[[File:Peephole_Long_Short-Term_Memory.svg|300px|thumbnail|A peephole LSTM unit with input (i.e. <math>i</math>), output (i.e. <math>o</math>), and forget (i.e. <math>f</math>) gates]]
+
+The figure on the right is a graphical representation of an LSTM unit with peephole connections (i.e. a peephole LSTM).<ref name="peepholeLSTM"/><ref name="peephole2002"/> Peephole connections allow the gates to access the constant error carousel (CEC), whose activation is the cell state.<ref name="peepholeLSTM"/> <math>h_{t-1}</math> is not used, <math>c_{t-1}</math> is used instead in most places.
+:<math>
+\begin{align}
+f_t &= \sigma_g(W_{f} x_t + U_{f} c_{t-1} + b_f) \\
+i_t &= \sigma_g(W_{i} x_t + U_{i} c_{t-1} + b_i) \\
+o_t &= \sigma_g(W_{o} x_t + U_{o} c_{t-1} + b_o) \\
+c_t &= f_t \odot c_{t-1} + i_t \odot \sigma_c(W_{c} x_t + b_c) \\
+h_t &= o_t \odot \sigma_h(c_t)
+\end{align}
+</math>
+
+Each of the gates can be thought as a "standard" neuron in a feed-forward (or multi-layer) neural network: that is, they compute an activation (using an activation function) of a weighted sum. <math>i_t,  o_t</math> and <math>f_t</math> represent the activations of respectively the input, output and forget gates, at time step <math>t</math>.
+
+The 3 exit arrows from the memory cell <math>c</math> to the 3 gates <math>i,  o</math> and <math>f</math> represent the ''peephole'' connections. These peephole connections actually denote the contributions of the activation of the memory cell <math>c</math> at time step <math>t-1</math>, i.e. the contribution of <math>c_{t-1}</math> (and not <math>c_{t}</math>, as the picture may suggest). In other words, the gates <math>i,  o</math> and <math>f</math> calculate their activations at time step <math>t</math> (i.e., respectively, <math>i_t,  o_t</math> and <math>f_t</math>) also considering the activation of the memory cell <math>c</math> at time step <math>t - 1</math>, i.e. <math>c_{t-1}</math>.
+
+The single left-to-right arrow exiting the memory cell is ''not'' a peephole connection and denotes <math>c_{t}</math>.
+
+The little circles containing a <math>\times</math> symbol represent an element-wise multiplication between its inputs. The big circles containing an ''S''-like curve represent the application of a differentiable function (like the sigmoid function) to a weighted sum.
+
+=== Peephole convolutional LSTM ===
+Peephole [[Convolutional neural network|convolutional]] LSTM.<ref name="shi2015">{{Cite journal 
+ | author = Xingjian Shi
+ | author2 = Zhourong Chen
+ | author3 = Hao Wang
+ | author4 = Dit-Yan Yeung
+ | author5 = Wai-kin Wong
+ | author6 = Wang-chun Woo
+ | title = Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting
+ | journal = Proceedings of the 28th International Conference on Neural Information Processing Systems
+ | pages = 802–810
+ | year = 2015
+ | arxiv = 1506.04214
+ | bibcode = 2015arXiv150604214S
+ }}</ref> The <math>*</math> denotes the [[convolution]] operator.
+:<math id="Page 4, formula 4 in [33] reference (Ot is calculated for ''C''(''t'') intead of ''C''(''t'' − 1)): https://arxiv.org/abs/1506.04214v2">
+\begin{align}
+f_t &= \sigma_g(W_{f} * x_t + U_{f} * h_{t-1} + V_{f} \odot c_{t-1} + b_f) \\
+i_t &= \sigma_g(W_{i} * x_t + U_{i} * h_{t-1} + V_{i} \odot c_{t-1} + b_i) \\
+c_t &= f_t \odot c_{t-1} + i_t \odot \sigma_c(W_{c} * x_t + U_{c} * h_{t-1} + b_c) \\
+o_t &= \sigma_g(W_{o} * x_t + U_{o} * h_{t-1} + V_{o} \odot c_{t} + b_o) \\
+h_t &= o_t \odot \sigma_h(c_t)
+\end{align}
+</math>
+
+== Training ==
+An RNN using LSTM units can be trained in a supervised fashion on a set of training sequences, using an optimization algorithm like [[gradient descent]] combined with [[backpropagation through time]] to compute the gradients needed during the optimization process, in order to change each weight of the LSTM network in proportion to the derivative of the error (at the output layer of the LSTM network) with respect to corresponding weight.
+
+A problem with using [[gradient descent]] for standard RNNs is that error gradients [[Vanishing gradient problem|vanish]] exponentially quickly with the size of the time lag between important events. This is due to <math>\lim_{n \to \infty}W^n = 0</math> if the [[spectral radius]] of <math>W</math> is smaller than 1.<ref name="hochreiter1991" /><ref name=gradf>{{Cite book|chapter-url=https://www.researchgate.net/publication/2839938|chapter=Gradient Flow in Recurrent Nets: the Difficulty of Learning Long-Term Dependencies (PDF Download Available)|last1=Hochreiter|first1=S.|first2=Y. |last2=Bengio|first3=P. |last3=Frasconi |first4=J. |last4=Schmidhuber|editor-first1=S. C. |editor-last1=Kremer and |editor-first2=J. F. |editor-last2=Kolen |title=A Field Guide to Dynamical Recurrent Neural Networks.|date=2001|publisher=IEEE Press}}</ref>
+
+However, with LSTM units, when error values are back-propagated from the output layer, the error remains in the LSTM unit's cell. This "error carousel" continuously feeds error back to each of the LSTM unit's gates, until they learn to cut off the value.
+
+=== CTC score function ===
+Many applications use stacks of LSTM RNNs<ref name="fernandez2007ijcai">{{Cite journal |last1=Fernández |first1=Santiago |last2=Graves |first2=Alex |last3=Schmidhuber |first3=Jürgen |date=2007 |title=Sequence labelling in structured domains with hierarchical recurrent neural networks |citeseerx=10.1.1.79.1887 |journal=Proc. 20th Int. Joint Conf. On Artificial Intelligence, Ijcai 2007 |pages=774–779}}</ref> and train them by [[connectionist temporal classification (CTC)]]<ref name="graves2006">{{Cite journal |last1=Graves |first1=Alex |last2=Fernández |first2=Santiago |last3=Gomez |first3=Faustino |last4=Schmidhuber |first4=Jürgen | date=2006 |title=Connectionist temporal classification: Labelling unsegmented sequence data with recurrent neural networks |citeseerx=10.1.1.75.6306 |journal=In Proceedings of the International Conference on Machine Learning, ICML 2006 |pages=369–376}}</ref> to find an RNN weight matrix that maximizes the probability of the label sequences in a training set, given the corresponding input sequences. CTC achieves both alignment and recognition.
+
+=== Alternatives ===
+Sometimes, it can be advantageous to train (parts of) an LSTM by [[neuroevolution]]<ref name="wierstra2005" /> or by policy gradient methods, especially when there is no "teacher" (that is, training labels).
+
+== Applications ==
+Applications of LSTM include:
+
+{{Div col|colwidth=25em}}
+*[[Robot control]]<ref name="mayer2006">{{Cite book|last1=Mayer|first1=H.|last2=Gomez|first2=F.|last3=Wierstra|first3=D.|last4=Nagy|first4=I.|last5=Knoll|first5=A.|last6=Schmidhuber|first6=J.|title=2006 IEEE/RSJ International Conference on Intelligent Robots and Systems |chapter=A System for Robotic Heart Surgery that Learns to Tie Knots Using Recurrent Neural Networks |date=October 2006|pages=543–548|doi=10.1109/IROS.2006.282190|isbn=978-1-4244-0258-8|citeseerx=10.1.1.218.3399|s2cid=12284900}}</ref>
+*[[Time series prediction]]<ref name="wierstra2005" >{{Cite journal|last1=Wierstra|first1=Daan|last2=Schmidhuber|first2=J.|last3=Gomez|first3=F. J.|date=2005|title=Evolino: Hybrid Neuroevolution/Optimal Linear Search for Sequence Learning|url=https://www.academia.edu/5830256|journal=Proceedings of the 19th International Joint Conference on Artificial Intelligence (IJCAI), Edinburgh|pages=853–858}}</ref>
+*[[Speech recognition]]<ref name="graves2005">{{cite journal | last1 = Graves | first1 = A. | last2 = Schmidhuber | first2 = J. | year = 2005 | title = Framewise phoneme classification with bidirectional LSTM and other neural network architectures | journal = Neural Networks | volume = 18 | issue = 5–6| pages = 602–610 | doi=10.1016/j.neunet.2005.06.042| pmid = 16112549 | citeseerx = 10.1.1.331.5800 | s2cid = 1856462 }}</ref><ref name="fernandez2007icann">{{Cite journal| last1=Fernández| first1=S.| last2=Graves| first2=A.| last3=Schmidhuber| first3=J.| date=9 September 2007| access-date=28 December 2023| title=An Application of Recurrent Neural Networks to Discriminative Keyword Spotting| url=http://dl.acm.org/citation.cfm?id=1778066.1778092| journal=Proceedings of the 17th International Conference on Artificial Neural Networks| series=ICANN'07| location=Berlin, Heidelberg| publisher=Springer-Verlag| pages=220–229| isbn=978-3540746935}}</ref><ref name="graves2013">{{cite book|last2=Mohamed|first2=Abdel-rahman|last3=Hinton|first3=Geoffrey|date=2013|pages=6645–6649|last1=Graves|first1=Alex|title=2013 IEEE International Conference on Acoustics, Speech and Signal Processing |chapter=Speech recognition with deep recurrent neural networks |doi=10.1109/ICASSP.2013.6638947|isbn=978-1-4799-0356-6|arxiv=1303.5778|s2cid=206741496}}</ref>
+*Rhythm learning<ref name="peephole2002">{{cite journal | last1 = Gers | first1 = F. | last2 = Schraudolph | first2 = N. | last3 = Schmidhuber | first3 = J. | year = 2002 | title = Learning precise timing with LSTM recurrent networks | url = http://www.jmlr.org/papers/volume3/gers02a/gers02a.pdf | journal = Journal of Machine Learning Research | volume = 3 | pages = 115–143 }}</ref>
+* Hydrological rainfall–runoff modeling<ref>{{Cite journal |last1=Kratzert |first1=Frederik |last2=Klotz |first2=Daniel |last3=Shalev |first3=Guy |last4=Klambauer |first4=Günter |last5=Hochreiter |first5=Sepp |last6=Nearing |first6=Grey |date=2019-12-17 |title=Towards learning universal, regional, and local hydrological behaviors via machine learning applied to large-sample datasets |url=https://hess.copernicus.org/articles/23/5089/2019/ |journal=Hydrology and Earth System Sciences|volume=23 |issue=12 |pages=5089–5110 |doi=10.5194/hess-23-5089-2019 |arxiv=1907.08456 |bibcode=2019HESS...23.5089K |issn=1027-5606 |doi-access=free }}</ref>
+*Music composition<ref name="eck2002">{{Cite book|last1=Eck|first1=Douglas|last2=Schmidhuber|first2=Jürgen|title=Artificial Neural Networks — ICANN 2002 |chapter=Learning the Long-Term Structure of the Blues |date=2002-08-28|volume=2415|publisher=Springer, Berlin, Heidelberg|pages=284–289|doi=10.1007/3-540-46084-5_47|isbn=978-3540460848|series=Lecture Notes in Computer Science|citeseerx=10.1.1.116.3620}}</ref>
+*[[Energy forecasting]]<ref name="AMVT"/>
+*Grammar learning<ref name="gers2002">{{cite journal | last1 = Schmidhuber | first1 = J. | last2 = Gers | first2 = F. | last3 = Eck | first3 = D. | last4 = Schmidhuber | first4 = J. | last5 = Gers | first5 = F. | year = 2002 | title = Learning nonregular languages: A comparison of simple recurrent networks and LSTM | journal = Neural Computation | volume = 14 | issue = 9| pages = 2039–2041 | doi=10.1162/089976602320263980| pmid = 12184841 | citeseerx = 10.1.1.11.7369 | s2cid = 30459046 }}</ref><ref name="peepholeLSTM">{{cite journal | last1 = Gers | first1 = F. A. | last2 = Schmidhuber | first2 = J. | year = 2001 | title = LSTM Recurrent Networks Learn Simple Context Free and Context Sensitive Languages | url = ftp://ftp.idsia.ch/pub/juergen/L-IEEE.pdf | journal = IEEE Transactions on Neural Networks | volume = 12 | issue = 6| pages = 1333–1340 | doi=10.1109/72.963769| pmid = 18249962 | bibcode = 2001ITNN...12.1333G | archive-url = https://web.archive.org/web/20170706014426/ftp://ftp.idsia.ch/pub/juergen/L-IEEE.pdf | archive-date = 2017-07-06 | url-status = dead | s2cid = 10192330 }}</ref><ref name="perez2003">{{cite journal | last1 = Perez-Ortiz | first1 = J. A. | last2 = Gers | first2 = F. A. | last3 = Eck | first3 = D. | last4 = Schmidhuber | first4 = J. | year = 2003 | title = Kalman filters improve LSTM network performance in problems unsolvable by traditional recurrent nets | journal = Neural Networks | volume = 16 | issue = 2| pages = 241–250 | doi=10.1016/s0893-6080(02)00219-8| pmid = 12628609 | citeseerx = 10.1.1.381.1992 }}</ref>
+*[[Handwriting recognition]]<ref name="graves2009nips">A. Graves, J. Schmidhuber. Offline Handwriting Recognition with Multidimensional Recurrent Neural Networks. Advances in Neural Information Processing Systems 22, NIPS'22, pp 545–552, Vancouver, MIT Press, 2009.</ref><ref>{{Cite journal|last1=Graves|first1=A.|last2=Fernández|first2=S.|last3=Liwicki|first3=M.|last4=Bunke|first4=H.|last5=Schmidhuber|first5=J.|date=3 December 2007|access-date=28 December 2023| title=Unconstrained Online Handwriting Recognition with Recurrent Neural Networks|url=http://dl.acm.org/citation.cfm?id=2981562.2981635|journal=Proceedings of the 20th International Conference on Neural Information Processing Systems|series=NIPS'07|location=USA|publisher=Curran Associates Inc.|pages=577–584|isbn=9781605603520}}</ref>
+*Human action recognition<ref name="baccouche2011">{{cite book |first1=M. |last1=Baccouche |first2=F. |last2=Mamalet |first3=C. |last3=Wolf |first4=C. |last4=Garcia |first5=A. |last5=Baskurt |chapter=Sequential Deep Learning for Human Action Recognition |title=2nd International Workshop on Human Behavior Understanding (HBU) |editor-first=A. A. |editor-last=Salah |editor2-first=B. |editor2-last=Lepri |location=Amsterdam, Netherlands |pages=29–39 |series=Lecture Notes in Computer Science |volume=7065 |publisher=Springer |year=2011 |isbn= 978-3-642-25445-1|doi=10.1007/978-3-642-25446-8_4 }}</ref>
+*[[Sign language|Sign language translation]]<ref name="huang2018">{{cite arXiv | last1=Huang | first1=Jie | last2=Zhou | first2=Wengang | last3=Zhang | first3=Qilin | last4=Li | first4=Houqiang | last5=Li | first5=Weiping | title=Video-based Sign Language Recognition without Temporal Segmentation | date=2018-01-30 | class=cs.CV | eprint=1801.10111 }}</ref>
+*Protein homology detection<ref name="hochreiter2007">{{Cite journal 
+| last1 = Hochreiter | first1 = S. 
+| last2 = Heusel | first2 = M. 
+| last3 = Obermayer | first3 = K. 
+| doi = 10.1093/bioinformatics/btm247 
+| title = Fast model-based protein homology detection without alignment 
+| journal = Bioinformatics 
+| volume = 23 
+| issue = 14 
+| pages = 1728–1736 
+| year = 2007 
+| pmid =  17488755
+| doi-access = free 
+}}</ref>
+*Predicting subcellular localization of proteins<ref name="thireou2007">{{cite journal | last1 = Thireou | first1 = T. | last2 = Reczko | first2 = M. | year = 2007 | title = Bidirectional Long Short-Term Memory Networks for predicting the subcellular localization of eukaryotic proteins | url = | journal = IEEE/ACM Transactions on Computational Biology and Bioinformatics | volume = 4 | issue = 3| pages = 441–446 | doi=10.1109/tcbb.2007.1015| pmid = 17666763 | bibcode = 2007ITCBB...4..441T | s2cid = 11787259 }}</ref>
+*Time series [[anomaly detection]]<ref name="malhotra2015">{{Cite journal|last1=Malhotra|first1=Pankaj|last2=Vig|first2=Lovekesh|last3=Shroff|first3=Gautam|last4=Agarwal|first4=Puneet|date=April 2015|title=Long Short Term Memory Networks for Anomaly Detection in Time Series|url=https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2015-56.pdf|journal=European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning — ESANN 2015|access-date=2018-02-21|archive-date=2020-10-30|archive-url=https://web.archive.org/web/20201030224634/https://www.elen.ucl.ac.be/Proceedings/esann/esannpdf/es2015-56.pdf|url-status=dead}}</ref>
+*Several prediction tasks in the area of [[business process management]]<ref name="tax2017">{{cite book | last1 = Tax| first1 = N. | last2 = Verenich | first2 = I. | last3 = La Rosa | first3 = M. | last4 = Dumas | first4 = M. | title = Advanced Information Systems Engineering | chapter = Predictive Business Process Monitoring with LSTM Neural Networks | year = 2017 | volume = 10253 | pages = 477–492| doi=10.1007/978-3-319-59536-8_30| arxiv = 1612.02130 | series = Lecture Notes in Computer Science | isbn = 978-3-319-59535-1 | s2cid = 2192354 }}</ref>
+*Prediction in medical care pathways<ref name="choi2016">{{cite journal | last1 = Choi| first1 = E. | last2 = Bahadori| first2 = M.T. | last3 = Schuetz | first3 = E. | last4 = Stewart| first4 = W. | last5 = Sun| first5 = J. | journal = JMLR Workshop and Conference Proceedings | year = 2016 | title = Doctor AI: Predicting Clinical Events via Recurrent Neural Networks | url = http://proceedings.mlr.press/v56/Choi16.html | volume = 56 | pages = 301–318| pmid = 28286600 | pmc = 5341604 | bibcode = 2015arXiv151105942C | arxiv = 1511.05942 }}</ref>
+*[[Semantic parsing]]<ref name="jia2016">{{cite arXiv |last1=Jia |first1=Robin |last2=Liang |first2=Percy |author2-link=Percy Liang |year=2016 |eprint=1606.03622 |title=Data Recombination for Neural Semantic Parsing |class=cs.CL }}</ref>
+*[[Object co-segmentation]]<ref name="Wang Duan Zhang Niu p=1657">{{cite journal | last1=Wang | first1=Le | last2=Duan | first2=Xuhuan | last3=Zhang | first3=Qilin | last4=Niu | first4=Zhenxing | last5=Hua | first5=Gang | last6=Zheng | first6=Nanning | title=Segment-Tube: Spatio-Temporal Action Localization in Untrimmed Videos with Per-Frame Segmentation | journal=Sensors | volume=18 | issue=5 | date=2018-05-22 | issn=1424-8220 | doi=10.3390/s18051657 | pmid=29789447 | pmc=5982167 | page=1657 | bibcode=2018Senso..18.1657W | url=https://qilin-zhang.github.io/_pages/pdfs/Segment-Tube_Spatio-Temporal_Action_Localization_in_Untrimmed_Videos_with_Per-Frame_Segmentation.pdf| doi-access=free }}</ref><ref name="Duan Wang Zhai Zheng 2018 p.">{{cite conference | last1=Duan | first1=Xuhuan | last2=Wang | first2=Le | last3=Zhai | first3=Changbo | last4=Zheng | first4=Nanning | last5=Zhang | first5=Qilin | last6=Niu | first6=Zhenxing | last7=Hua | first7=Gang | title=2018 25th IEEE International Conference on Image Processing (ICIP) | chapter=Joint Spatio-Temporal Action Localization in Untrimmed Videos with Per-Frame Segmentation | publisher=25th IEEE International Conference on Image Processing (ICIP)
+| year=2018 | pages=918–922 | isbn=978-1-4799-7061-2 | doi=10.1109/icip.2018.8451692 }}</ref>
+*Airport passenger management<ref name="orsini2019">{{cite conference |title=Neural networks trained with WiFi traces to predict airport passenger behavior |last1=Orsini |first1=F. |last2=Gastaldi |first2=M. |last3=Mantecchini |first3=L. |last4=Rossi |first4=R. |date=2019 |publisher=IEEE |location=Krakow |conference=6th International Conference on Models and Technologies for Intelligent Transportation Systems |id=8883365 |doi=10.1109/MTITS.2019.8883365 |arxiv = 1910.14026}}</ref>
+*Short-term [[traffic forecast]]<ref name="liu2017">{{cite journal |last1=Zhao |first1=Z. |last2=Chen |first2=W. |last3=Wu |first3=X. |last4=Chen |first4=P.C.Y. |last5=Liu |first5=J. |date=2017 |title=LSTM network: A deep learning approach for Short-term traffic forecast |journal=IET Intelligent Transport Systems |volume=11 |issue=2 |pages=68–75 |doi=10.1049/iet-its.2016.0208 |s2cid=114567527 }}</ref>
+*[[Drug design]]<ref name="pmid29095571">{{cite journal| author=Gupta A, Müller AT, Huisman BJH, Fuchs JA, Schneider P, Schneider G| title=Generative Recurrent Networks for De Novo Drug Design. | journal=Mol Inform | year= 2018 | volume= 37 | issue= 1–2 | article-number=1700111 | pmid=29095571 | doi=10.1002/minf.201700111 | pmc=5836943 }}</ref>
+*[[Financial forecasting]]<ref name="saiful2020">{{Cite journal|date=2020-10-26|title=Foreign Exchange Currency Rate Prediction using a GRU-LSTM Hybrid Network|journal=Soft Computing Letters|language=en|article-number=100009|doi=10.1016/j.socl.2020.100009|issn=2666-2221|doi-access=free|last1=Saiful Islam|first1=Md.|last2=Hossain|first2=Emam|volume=3}}</ref>
+*Activity classification in video<ref>{{Cite journal |last1=Martin |first1=Abbey |last2=Hill |first2=Andrew J. |last3=Seiler |first3=Konstantin M. |last4=Balamurali |first4=Mehala |date=2024-05-27 |title=Automatic excavator action recognition and localisation for untrimmed video using hybrid LSTM-Transformer networks |url=https://www.tandfonline.com/doi/full/10.1080/17480930.2023.2290364 |journal=International Journal of Mining, Reclamation and Environment |language=en |volume=38 |issue=5 |pages=353–372 |doi=10.1080/17480930.2023.2290364 |bibcode=2024IJMRE..38..353M |issn=1748-0930|url-access=subscription }}</ref>
+{{Div col end}}'''2015:''' Google started using an LSTM trained by CTC for speech recognition on [[Google Voice]].<ref name="Beau15">{{Cite news |last=Beaufays |first=Françoise |date=August 11, 2015 |title=The neural networks behind Google Voice transcription |url=http://googleresearch.blogspot.co.at/2015/08/the-neural-networks-behind-google-voice.html |access-date=2017-06-27 |work=Research Blog}}</ref><ref name="GoogleVoiceSearch">{{Cite news |last1=Sak |first1=Haşim |last2=Senior |first2=Andrew |last3=Rao |first3=Kanishka |last4=Beaufays |first4=Françoise |last5=Schalkwyk |first5=Johan |date=September 24, 2015 |title=Google voice search: faster and more accurate |url=http://googleresearch.blogspot.co.uk/2015/09/google-voice-search-faster-and-more.html |access-date=2017-06-27 |work=Research Blog |language=en-US}}</ref> According to the official blog post, the new model cut transcription errors by 49%.<ref name="googleblog2015">{{Cite web |date=23 July 2015 |title=Neon prescription... or rather, New transcription for Google Voice |url=https://googleblog.blogspot.com/2015/07/neon-prescription-or-rather-new.html |access-date=2020-04-25 |website=Official Google Blog |language=en}}</ref>
+
+'''2016:''' Google started using an LSTM to suggest messages in the Allo conversation app.<ref name="GoogleAllo">{{Cite news |last=Khaitan |first=Pranav |date=May 18, 2016 |title=Chat Smarter with Allo |url=http://googleresearch.blogspot.co.at/2016/05/chat-smarter-with-allo.html |access-date=2017-06-27 |work=Research Blog}}</ref> In the same year, Google released the [[Google Neural Machine Translation]] system for Google Translate which used LSTMs to reduce translation errors by 60%.<ref name="GoogleTranslate" /><ref name="WiredGoogleTranslate">{{Cite magazine |last=Metz |first=Cade |date=September 27, 2016 |title=An Infusion of AI Makes Google Translate More Powerful Than Ever {{!}} WIRED |url=https://www.wired.com/2016/09/google-claims-ai-breakthrough-machine-translation/ |access-date=2017-06-27 |magazine=Wired}}</ref><ref name="googleblog2016">{{Cite web |date=27 September 2016 |title=A Neural Network for Machine Translation, at Production Scale |url=http://ai.googleblog.com/2016/09/a-neural-network-for-machine.html |access-date=2020-04-25 |website=Google AI Blog |language=en}}</ref>
+
+Apple announced in its [[Worldwide Developers Conference]] that it would start using the LSTM for quicktype<ref name="AppleQuicktype">{{Cite web |last=Efrati |first=Amir |date=June 13, 2016 |title=Apple's Machines Can Learn Too |url=https://www.theinformation.com/apples-machines-can-learn-too |access-date=2017-06-27 |website=The Information}}</ref><ref name="AppleQuicktype2">{{Cite news |last=Ranger |first=Steve |date=June 14, 2016 |title=iPhone, AI and big data: Here's how Apple plans to protect your privacy |url=https://www.zdnet.com/article/ai-big-data-and-the-iphone-heres-how-apple-plans-to-protect-your-privacy/ |access-date=2017-06-27 |work=ZDNet}}</ref><ref>{{Cite web |title=Can Global Semantic Context Improve Neural Language Models? – Apple |url=https://machinelearning.apple.com/2018/09/27/can-global-semantic-context-improve-neural-language-models.html |access-date=2020-04-30 |website=Apple Machine Learning Journal |language=en-US}}</ref> in the iPhone and for Siri.<ref name="AppleSiri">{{Cite web |last=Smith |first=Chris |date=2016-06-13 |title=iOS 10: Siri now works in third-party apps, comes with extra AI features |url=http://bgr.com/2016/06/13/ios-10-siri-third-party-apps/ |access-date=2017-06-27 |website=BGR}}</ref><ref name="capes2017">{{Cite journal |last1=Capes |first1=Tim |last2=Coles |first2=Paul |last3=Conkie |first3=Alistair |last4=Golipour |first4=Ladan |last5=Hadjitarkhani |first5=Abie |last6=Hu |first6=Qiong |last7=Huddleston |first7=Nancy |last8=Hunt |first8=Melvyn |last9=Li |first9=Jiangchuan |last10=Neeracher |first10=Matthias |last11=Prahallad |first11=Kishore |date=2017-08-20 |title=Siri On-Device Deep Learning-Guided Unit Selection Text-to-Speech System |url=http://www.isca-speech.org/archive/Interspeech_2017/abstracts/1798.html |journal=Interspeech 2017 |language=en |publisher=ISCA |pages=4011–4015 |doi=10.21437/Interspeech.2017-1798|url-access=subscription }}</ref>
+
+Amazon released [[Amazon Polly|Polly]], which generates the voices behind Alexa, using a bidirectional LSTM for the text-to-speech technology.<ref name="AmazonAlexa">{{Cite web |last=Vogels |first=Werner |date=30 November 2016 |title=Bringing the Magic of Amazon AI and Alexa to Apps on AWS. – All Things Distributed |url=http://www.allthingsdistributed.com/2016/11/amazon-ai-and-alexa-for-all-aws-apps.html |access-date=2017-06-27 |website=www.allthingsdistributed.com}}</ref>
+
+'''2017:'''  Facebook performed some 4.5 billion automatic translations every day using long short-term memory networks.<ref name="FacebookTranslate" />
+
+Microsoft reported reaching 94.9% recognition accuracy on the [[Switchboard corpus]], incorporating a vocabulary of 165,000 words. The approach used "dialog session-based long-short-term memory".<ref>{{Cite book |last1=Xiong |first1=W. |last2=Wu |first2=L. |last3=Alleva |first3=F. |last4=Droppo |first4=J. |last5=Huang |first5=X. |last6=Stolcke |first6=A. |chapter=The Microsoft 2017 Conversational Speech Recognition System |date=April 2018 |title=2018 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP) |publisher=IEEE |pages=5934–5938 |doi=10.1109/ICASSP.2018.8461870 |arxiv=1708.06073 |isbn=978-1-5386-4658-8}}</ref>
+
+'''2018:''' [[OpenAI]] used LSTM trained by policy gradients to beat humans in the complex video game of Dota 2,<ref name="OpenAIfive" /> and to control a human-like robot hand that manipulates physical objects with unprecedented dexterity.<ref name="OpenAIhand" /><ref name="miraculous2021" />
+
+'''2019:''' [[DeepMind]] used LSTM trained by policy gradients to excel at the complex video game of [[Starcraft II]].<ref name="alphastar" /><ref name="miraculous2021" />
+
+== History ==
+
+=== Development ===
+
+Aspects of LSTM were anticipated by "focused back-propagation",<ref name="mozer1989">{{Cite journal|last1=Mozer|first1=Mike|title=A Focused Backpropagation Algorithm for Temporal Pattern Recognition|journal=Complex Systems|year=1989}}</ref> cited by the LSTM paper.<ref name="lstm1997" />
+
+Sepp Hochreiter's 1991 German diploma thesis analyzed the [[vanishing gradient problem]] and developed principles of the method.<ref name="hochreiter1991">{{cite thesis 
+|url=http://www.bioinf.jku.at/publications/older/3804.pdf
+|degree=diploma 
+|first=Sepp
+|last=Hochreiter
+|title=Untersuchungen zu dynamischen neuronalen Netzen
+|publisher=Technical University Munich, Institute of Computer Science
+|year=1991}}</ref> His supervisor, [[Jürgen Schmidhuber]], considered the thesis highly significant.<ref name="DLhistory">{{cite arXiv|last=Schmidhuber|first=Juergen|author-link=Juergen Schmidhuber|date=2022|title=Annotated History of Modern AI and Deep Learning |class=cs.NE|eprint=2212.11279}}</ref>
+
+An early version of LSTM was published in 1995 in a technical report by [[Sepp Hochreiter]] and [[Jürgen Schmidhuber]],<ref>{{Cite Q | Q98967430 }}</ref> then published in the [[Conference on Neural Information Processing Systems|NIPS]] 1996 conference.<ref name="hochreiter1996" />
+
+The most commonly used reference point for LSTM was published in 1997 in the journal [[Neural Computation (journal)|Neural Computation]].<ref name="lstm1997">{{Cite journal 
+ | author = Sepp Hochreiter
+ | author2 = Jürgen Schmidhuber
+ | title = Long short-term memory
+ | journal = [[Neural Computation (journal)|Neural Computation]]
+ | volume = 9
+ | issue = 8
+ | pages = 1735–1780
+ | year = 1997
+ | url = https://www.researchgate.net/publication/13853244
+ | doi=10.1162/neco.1997.9.8.1735
+ | pmid=9377276
+| s2cid = 1915014
+ | author2-link = Jürgen Schmidhuber
+ | author-link = Sepp Hochreiter
+ }}</ref> By introducing Constant Error Carousel (CEC) units, LSTM deals with the [[vanishing gradient problem]]. The initial version of LSTM block included cells, input and output gates.<ref name="ASearchSpaceOdyssey">{{Cite journal|author1=Klaus Greff |author2=Rupesh Kumar Srivastava |author3=Jan Koutník |author4=Bas R. Steunebrink |author5=Jürgen Schmidhuber |arxiv=1503.04069 |title=LSTM: A Search Space Odyssey |journal=IEEE Transactions on Neural Networks and Learning Systems |volume=28 |issue=10 |pages=2222–2232 |date=2015 |doi=10.1109/TNNLS.2016.2582924 |pmid=27411231 |bibcode=2015arXiv150304069G |s2cid=3356463 }}</ref>
+
+[[Felix Gers]], Jürgen Schmidhuber, and Fred Cummins introduced the forget gate (also called "keep gate") into the LSTM architecture in 1999,<ref name="lstm1999">{{Cite book |last1=Gers |first1=Felix |title=9th International Conference on Artificial Neural Networks: ICANN '99 |last2=Schmidhuber |first2=Jürgen |last3=Cummins |first3=Fred |year=1999 |isbn=0-85296-721-7 |volume=1999 |pages=850–855 |chapter=Learning to forget: Continual prediction with LSTM |doi=10.1049/cp:19991218}}</ref> enabling the LSTM to reset its own state.<ref name="ASearchSpaceOdyssey" /> This is the most commonly used version of LSTM nowadays. They added peephole connections in 2000.<ref name="peepholeLSTM" /><ref name="peephole2002" /> Additionally, the output activation function was omitted.<ref name="ASearchSpaceOdyssey" />
+
+=== Development of variants ===
+In 2005 Graves and Schmidhuber<ref name="graves2005" /> published LSTM with full [[backpropagation through time]] and bidirectional LSTM.
+
+In 2006 Graves, Fernandez, Gomez, and Schmidhuber<ref name="graves2006" /> introduced a new error function for LSTM: [[Connectionist Temporal Classification]] (CTC) for simultaneous alignment and recognition of sequences.
+
+In 2014 Kyunghyun Cho an others<ref name="cho2014">{{cite arXiv |eprint=1406.1078 |class=cs.CL |first1=Kyunghyun |last1=Cho |first2=Bart |last2=van Merrienboer |title=Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation |date=2014 |last3=Gulcehre |first3=Caglar |last4=Bahdanau |first4=Dzmitry |last5=Bougares |first5=Fethi |last6=Schwenk |first6=Holger |last7=Bengio |first7=Yoshua}}</ref> published a simplified variant of the forget gate LSTM<ref name="lstm1999" /> called [[Gated recurrent unit]] (GRU).
+
+In 2015 Srivastava, Greff, and Schmidhuber used LSTM principles<ref name="lstm1999" /> to create the [[Highway network]], a [[feedforward neural network]] with hundreds of layers, much deeper than previous networks.<ref name="highway2015">{{cite arXiv |eprint=1505.00387 |class=cs.LG |first1=Rupesh Kumar |last1=Srivastava |first2=Klaus |last2=Greff |title=Highway Networks |date=2 May 2015 |last3=Schmidhuber |first3=Jürgen}}</ref><ref name="highway2015neurips">{{cite conference |last1=Srivastava |first1=Rupesh K |last2=Greff |first2=Klaus |last3=Schmidhuber |first3=Juergen |date=December 2015 |title=Training Very Deep Networks |url=https://dl.acm.org/doi/10.5555/2969442.2969505 |conference=NIPS'15: Proceedings of the 29th International Conference on Neural Information Processing Systems |volume=2 |pages=2377–2385 |publisher=MIT Press |publication-place=Cambridge, MA, United States |location= Montreal, Canada}}</ref><ref name="mostcited2021">{{Cite news |last=Schmidhuber |first=Jürgen |date=2021 |title=The most cited neural networks all build on work done in my labs |url=https://people.idsia.ch/~juergen/most-cited-neural-nets.html |access-date=2022-04-30 |work=AI Blog |location=IDSIA, Switzerland}}</ref> Concurrently, the [[Residual neural network|ResNet]] architecture was developed. It is equivalent to an open-gated or gateless highway network.<ref name="resnet2015">{{Cite conference |last1=He |first1=Kaiming |last2=Zhang |first2=Xiangyu |last3=Ren |first3=Shaoqing |last4=Sun |first4=Jian |title=2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR) |chapter=Deep Residual Learning for Image Recognition |date=2016 |publisher=IEEE |pages=770–778 |arxiv=1512.03385 |doi=10.1109/CVPR.2016.90 |isbn=978-1-4673-8851-1 }}</ref>
+
+A modern upgrade of LSTM called [[xLSTM]] is published by a team led by [[Sepp Hochreiter]].<ref>{{cite arXiv |eprint=2405.04517 |class=cs.LG |first1=Maximilian |last1=Beck |first2=Korbinian |last2=Pöppel |title=xLSTM: Extended Long Short-Term Memory |date=2024-05-07 |last3=Spanring |first3=Markus |last4=Auer |first4=Andreas |last5=Prudnikova |first5=Oleksandra |last6=Kopp |first6=Michael |last7=Klambauer |first7=Günter |last8=Brandstetter |first8=Johannes |last9=Hochreiter |first9=Sepp}}</ref><ref>{{Citation |title=NX-AI/xlstm |date=2024-06-04 |url=https://github.com/NX-AI/xlstm |access-date=2024-06-04 |publisher=NXAI}}</ref> One of the 2 blocks (mLSTM) of the architecture are parallelizable like the [[Transformer (deep learning architecture)|Transformer]] architecture, the other ones (sLSTM) allow state tracking.
+
+=== Applications ===
+'''2001:''' Gers and Schmidhuber trained LSTM to learn languages unlearnable by traditional models such as Hidden Markov Models.<ref name="peepholeLSTM" /><ref name="miraculous2021" />
+
+Hochreiter et al. used LSTM for [[meta-learning (computer science)|meta-learning]] (i.e. learning a learning algorithm).<ref>{{cite book |last1=Hochreiter |first1=S. |url=http://www.bioinf.jku.at/publications/older/1504.pdf |title=Artificial Neural Networks — ICANN 2001 |last2=Younger |first2=A. S. |last3=Conwell |first3=P. R. |year=2001 |isbn=978-3-540-42486-4 |series=Lecture Notes in Computer Science |volume=2130 |pages=87–94 |chapter=Learning to Learn Using Gradient Descent |citeseerx=10.1.1.5.323 |doi=10.1007/3-540-44668-0_13 |issn=0302-9743 |s2cid=52872549}}</ref>
+
+'''2004:''' First successful application of LSTM to speech [[Alex Graves (computer scientist)|Alex Graves]] et al.<ref name="graves2004">{{cite conference |last1=Graves |first1=Alex | last2=Beringer |first2=Nicole | last3=Eck |first3=Douglas  |last4=Schmidhuber |first4=Juergen |title=Biologically Plausible Speech Recognition with LSTM Neural Nets. |conference=Workshop on Biologically Inspired Approaches to Advanced Information Technology, Bio-ADIT 2004, Lausanne, Switzerland |pages=175–184 |year=2004 }}</ref><ref name="miraculous2021">{{cite arXiv |author=Schmidhuber, Juergen | title=Deep Learning: Our Miraculous Year 1990-1991 |date=10 May 2021 |eprint=2005.05744 |class=cs.NE}}</ref>
+
+'''2005:''' Daan Wierstra, Faustino Gomez, and Schmidhuber trained LSTM by [[neuroevolution]] without a teacher.<ref name="wierstra2005" />
+
+Mayer et al. trained LSTM to control [[robot]]s.<ref name="mayer2006" />
+
+'''2007:''' Wierstra, Foerster, Peters, and Schmidhuber trained LSTM by policy gradients for [[reinforcement learning]] without a teacher.<ref name="wierstra2007" >{{Cite journal|last1=Wierstra|first1=Daan|last2=Foerster|first2=Alexander|last4=Schmidhuber|first4=Juergen|last3=Peters|first3=Jan|date=2005|title=Solving Deep Memory POMDPs with Recurrent Policy Gradients|url=https://people.idsia.ch/~juergen/lstm-policy-gradient-2010.html|journal=International Conference on Artificial Neural Networks ICANN'07}}</ref>
+
+Hochreiter, Heuesel, and Obermayr applied LSTM to protein homology detection the field of [[biology]].<ref name="hochreiter2007" />
+
+'''2009:''' Justin Bayer et al. introduced [[neural architecture search]] for LSTM.<ref name="bayer2009">{{Cite journal |last1=Bayer |first1=Justin |last2=Wierstra |first2=Daan |last3=Togelius |first3=Julian |last4=Schmidhuber |first4=Juergen |date=2009 |title=Evolving memory cell structures for sequence learning |journal=International Conference on Artificial Neural Networks ICANN'09, Cyprus}}</ref><ref name="miraculous2021" />
+
+'''2009:''' An LSTM trained by CTC won the [[ICDAR]] connected handwriting recognition competition. Three such models were submitted by a team led by [[Alex Graves (computer scientist)|Alex Graves]].<ref name="graves2009">{{Cite journal|last1=Graves|first1=A.|last2=Liwicki|first2=M.|last3=Fernández|first3=S.|last4=Bertolami|first4=R.|last5=Bunke|first5=H.|last6=Schmidhuber|first6=J.|date=May 2009|title=A Novel Connectionist System for Unconstrained Handwriting Recognition|journal=IEEE Transactions on Pattern Analysis and Machine Intelligence|volume=31|issue=5|pages=855–868|citeseerx=10.1.1.139.4502|doi=10.1109/tpami.2008.137|issn=0162-8828|pmid=19299860|bibcode=2009ITPAM..31..855G |s2cid=14635907}}</ref> One was the most accurate model in the competition and another was the fastest.<ref name="maergner2009">{{Cite book|last1=Märgner|first1=Volker|last2=Abed|first2=Haikal El|title=2009 10th International Conference on Document Analysis and Recognition |chapter=ICDAR 2009 Arabic Handwriting Recognition Competition |date=July 2009|pages=1383–1387|doi=10.1109/ICDAR.2009.256|isbn=978-1-4244-4500-4|s2cid=52851337}}</ref> This was the first time an RNN won international competitions.<ref name="miraculous2021" />
+
+'''2013:''' Alex Graves, Abdel-rahman Mohamed, and Geoffrey Hinton used LSTM networks as a major component of a network that achieved a record 17.7% [[phoneme]] error rate on the classic [[TIMIT]] natural speech dataset.<ref name="graves2013" />
+
+'''2017:''' Researchers from [[Michigan State University]], [[IBM Research]], and [[Cornell University]] published a study in the Knowledge Discovery and Data Mining (KDD) conference.<ref>{{Cite book |last1=Baytas |first1=Inci M. |last2=Xiao |first2=Cao |last3=Zhang |first3=Xi |last4=Wang |first4=Fei |last5=Jain |first5=Anil K. |last6=Zhou |first6=Jiayu |chapter=Patient Subtyping via Time-Aware LSTM Networks |date=2017-08-04 |title=Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining |chapter-url=https://dl.acm.org/doi/pdf/10.1145/3097983.3097997 |location=New York, NY, USA |publisher=Association for Computing Machinery |pages=65–74 |doi=10.1145/3097983.3097997 |isbn=978-1-4503-4887-4}}</ref> Their [[time-aware LSTM]] (T-LSTM) performs better on certain data sets than standard LSTM.
+
+== See also ==
+<!-- Please respect alphabetical order -->
+{{Div col|colwidth=20em}}
+* [[Attention (machine learning)]]
+* [[Deep learning]]
+* [[Differentiable neural computer]]
+* [[Gated recurrent unit]]
+* [[Highway network]]
+* [[Long-term potentiation]]
+* [[Prefrontal cortex basal ganglia working memory]]
+* [[Recurrent neural network]]
+* [[Seq2seq]]
+* [[Transformer (machine learning model)]]
+* [[Time series]]
+{{Div col end}}
+
+== References ==
+{{Reflist}}
+
+== Further reading ==
+* {{cite journal |url= http://www.cs.umd.edu/~dmonner/papers/nn2012.pdf |title= A generalized LSTM-like training algorithm for second-order recurrent neural networks |first1= Derek D. |last1= Monner |first2= James A. |last2= Reggia |journal= Neural Networks |date= 2010 |volume= 25 |issue= 1 |pages= 70–83 |doi= 10.1016/j.neunet.2011.07.003 |pmid= 21803542 |pmc= 3217173 |quote= High-performing extension of LSTM that has been simplified to a single node type and can train arbitrary architectures }}
+* {{cite journal |url= http://www.jmlr.org/papers/volume3/gers02a/gers02a.pdf |last1= Gers |first1= Felix A. |first2= Nicol N. |last2= Schraudolph |first3= Jürgen |last3= Schmidhuber |title= Learning precise timing with LSTM recurrent networks |journal= Journal of Machine Learning Research |volume= 3 |date= Aug 2002 |pages= 115–143 }}
+* {{cite web |url= http://www.felixgers.de/papers/phd.pdf |work= PhD thesis |last= Gers |first= Felix |date= 2001 |title= Long Short-Term Memory in Recurrent Neural Networks }}
+* {{cite thesis |url= http://etd.uwc.ac.za/xmlui/handle/11394/249
+|title= Data Mining, Fraud Detection and Mobile Telecommunications: Call Pattern Analysis with Unsupervised Neural Networks |hdl= 11394/249 |last= Abidogun |first=  Olusola Adeniyi |work= Master's Thesis |url-status= live |archive-date= May 22, 2012 |archive-url= https://web.archive.org/web/20120522234026/http://etd.uwc.ac.za/usrfiles/modules/etd/docs/etd_init_3937_1174040706.pdf |year= 2005 |publisher= University of the Western Cape |type= Thesis }}
+** [http://etd.uwc.ac.za/bitstream/handle/11394/249/Abidogun_MSC_2005.pdf original] with two chapters devoted to explaining recurrent neural networks, especially LSTM.
+
+== External links ==
+*[http://www.idsia.ch/~juergen/rnn.html Recurrent Neural Networks] with over 30 LSTM papers by [[Jürgen Schmidhuber]]'s group at [[IDSIA]]
+*{{Cite book |last1=Zhang |first1=Aston |title=Dive into deep learning |last2=Lipton |first2=Zachary |last3=Li |first3=Mu |last4=Smola |first4=Alexander J. |date=2024 |publisher=Cambridge University Press |isbn=978-1-009-38943-3 |location=Cambridge New York Port Melbourne New Delhi Singapore |chapter=10.1. Long Short-Term Memory (LSTM) |chapter-url=https://d2l.ai/chapter_recurrent-modern/lstm.html}}
+
+{{Artificial intelligence navbox}}
+
+{{DEFAULTSORT:Long Short Term Memory}}
+[[Category:Neural network architectures]]
+[[Category:Deep learning]]
+[[Category:1997 in artificial intelligence]]
