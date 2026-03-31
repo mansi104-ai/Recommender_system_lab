@@ -1,0 +1,6 @@
+query,retrieved_items,precision,coverage,recall_against_high_quality_items
+q2_is_popular_or_year_gt_2020,18,0.889,1.0,1.0
+q3_action_or_adventure_and_rating_ge_3_5_and_year_gt_2018,6,1.0,0.333,0.375
+q1_comedy_and_rating_ge_4,4,0.75,0.222,0.188
+q4_scifi_and_rating_ge_4,3,1.0,0.167,0.188
+q5_popular_and_recent,1,1.0,0.056,0.062

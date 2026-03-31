@@ -1,0 +1,19 @@
+title,category,year,rating,ratings_count,tags,source,is_popular,is_recent,tag_count
+The Dark Knight,Action,2008,4.7,2900000,hero crime thriller dc,Public movie metadata,True,False,4
+Mad Max: Fury Road,Action,2015,4.4,1100000,post-apocalyptic chase desert spectacle,Public movie metadata,True,False,4
+John Wick: Chapter 4,Action,2023,4.2,540000,assassin stylized gun-fu revenge,Public movie metadata,True,False,4
+Deadpool & Wolverine,Action,2024,4.1,410000,marvel comedy antihero multiverse,Public movie metadata,False,True,4
+Spider-Man: Across the Spider-Verse,Adventure,2023,4.5,480000,animation multiverse superhero vibrant,Public movie metadata,True,False,4
+Top Gun: Maverick,Adventure,2022,4.3,690000,aviation legacy adrenaline drama,Public movie metadata,True,False,4
+Avatar: The Way of Water,Adventure,2022,4.0,830000,ocean spectacle franchise alien,Public movie metadata,False,False,4
+Mission: Impossible - Dead Reckoning,Adventure,2023,4.0,320000,spy stunts chase action,Public movie metadata,False,False,4
+Everything Everywhere All at Once,Comedy,2022,4.3,720000,multiverse absurd heartfelt action,Public movie metadata,True,False,4
+Inside Out 2,Comedy,2024,4.2,240000,animation family emotions sequel,Public movie metadata,False,True,4
+Barbie,Comedy,2023,4.1,590000,satire fantasy colorful doll,Public movie metadata,False,False,4
+Poor Things,Comedy,2023,4.0,310000,surreal period feminist quirky,Public movie metadata,False,False,4
+The Super Mario Bros. Movie,Comedy,2023,3.8,260000,animation family game adaptation,Public movie metadata,False,False,4
+Parasite,Drama,2019,4.6,1050000,satire class suspense korean,Public movie metadata,True,False,4
+Oppenheimer,Drama,2023,4.4,950000,biography history science thriller,Public movie metadata,True,False,4
+Interstellar,Sci-Fi,2014,4.6,2300000,space time family nasa,Public movie metadata,True,False,4
+Dune: Part Two,Sci-Fi,2024,4.5,650000,space epic prophecy sandworms,Public movie metadata,True,True,4
+Guardians of the Galaxy Vol. 3,Sci-Fi,2023,4.2,430000,marvel found-family space humor,Public movie metadata,True,False,4

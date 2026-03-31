@@ -1,0 +1,4 @@
+title,category,year,rating,ratings_count,tags,source,is_popular,is_recent,tag_count
+Interstellar,Sci-Fi,2014,4.6,2300000,space time family nasa,Public movie metadata,True,False,4
+Dune: Part Two,Sci-Fi,2024,4.5,650000,space epic prophecy sandworms,Public movie metadata,True,True,4
+Guardians of the Galaxy Vol. 3,Sci-Fi,2023,4.2,430000,marvel found-family space humor,Public movie metadata,True,False,4

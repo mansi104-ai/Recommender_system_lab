@@ -1,0 +1,6 @@
+Assignment 3 Solution Summary
+
+Corpus size: 80 documents
+Demo query: india pakistan militant kashmir parliament security
+PRF expanded query: india pakistan militant kashmir parliament security indian musharraf
+Cluster-aware PRF expanded query: india pakistan militant kashmir parliament security indian musharraf

@@ -1,0 +1,8 @@
+method,precision_at_5
+Initial TF-IDF,0.8
+Explicit feedback,0.6
+Hybrid feedback,1.0
+Pseudo relevance feedback,1.0
+Cluster PRF,0.8
+Rocchio,1.0
+Rocchio with LSA,0.6

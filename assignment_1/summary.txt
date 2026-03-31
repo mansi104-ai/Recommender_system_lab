@@ -1,0 +1,15 @@
+Assignment 1 Solution Summary
+
+Cleaned dataset size: 18 movies
+Popular items: 11
+Recent items: 3
+
+Best precision query:
+                                                    query  retrieved_items  precision  coverage  recall_against_high_quality_items
+q3_action_or_adventure_and_rating_ge_3_5_and_year_gt_2018                6        1.0     0.333                              0.375
+
+Baseline comparison:
+               method  items_considered  avg_rating  avg_year
+        Boolean rules                 4       4.450    2021.2
+Most popular baseline                 4       4.575    2014.0
+ Most recent baseline                 4       4.325    2023.8

@@ -1,0 +1,11 @@
+doc_id,title,keyword_relevant,content_score,collaborative_score,hybrid_score
+1,Doc 02: Indian security forces have shot dead eight suspected,True,0.4165483193352446,1.0,0.5915838235346712
+12,Doc 13: President General Pervez Musharraf says Pakistan wants to,True,0.38927694675920654,1.0,0.5724938627314445
+34,Doc 35: Pakistan's Foreign Ministry has announced retaliatory sanctions against,True,0.21693877426291727,1.0,0.45185714198404203
+58,Doc 59: Pakistan President Pervez Musharraf believes there is a,True,0.1321419941318625,1.0,0.39249939589230376
+26,Doc 27: Pakistan's President Pervez Musharraf says he is ready,True,0.1728897074469458,0.0,0.12102279521286205
+75,Doc 76: US President George W Bush has marked the,True,0.16640923950460607,0.0,0.11648646765322423
+63,Doc 64: Tight security is causing headaches for American travellers,False,0.1197330134665022,0.0,0.08381310942655153
+23,"Doc 24: Americans' fears about airplane security continue to increase,",False,0.08938804365082234,0.0,0.06257163055557563
+35,Doc 36: A spokesman for Afghanistan's Defence Ministry claims Osama,False,0.0740000256585922,0.0,0.05180001796101454
+41,Doc 42: The man accused to trying to blow up,False,0.04275563528054511,0.0,0.029928944696381573

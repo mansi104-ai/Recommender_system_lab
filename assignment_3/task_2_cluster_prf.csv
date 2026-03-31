@@ -1,0 +1,11 @@
+doc_id,title,cluster_label,keyword_relevant,content_score
+1,Doc 02: Indian security forces have shot dead eight suspected,"man, flight, reid, says",True,0.38927023896827173
+12,Doc 13: President General Pervez Musharraf says Pakistan wants to,"said, pakistan, palestinian, says",True,0.4469840573034801
+23,"Doc 24: Americans' fears about airplane security continue to increase,","man, flight, reid, says",False,0.07672464478123257
+26,Doc 27: Pakistan's President Pervez Musharraf says he is ready,"said, pakistan, palestinian, says",True,0.410760914400394
+34,Doc 35: Pakistan's Foreign Ministry has announced retaliatory sanctions against,"said, pakistan, palestinian, says",True,0.282399343811898
+35,Doc 36: A spokesman for Afghanistan's Defence Ministry claims Osama,"said, pakistan, palestinian, says",False,0.06351661196027698
+41,Doc 42: The man accused to trying to blow up,"man, flight, reid, says",False,0.0366985426161699
+58,Doc 59: Pakistan President Pervez Musharraf believes there is a,"said, pakistan, palestinian, says",True,0.18689465032836447
+63,Doc 64: Tight security is causing headaches for American travellers,"said, pakistan, palestinian, says",False,0.10277071240857619
+75,Doc 76: US President George W Bush has marked the,"said, pakistan, palestinian, says",True,0.17328761588072866

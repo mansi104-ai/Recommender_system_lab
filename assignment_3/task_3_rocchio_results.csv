@@ -1,0 +1,16 @@
+doc_id,title,cluster_label,keyword_relevant,score,alpha,beta,gamma
+1,Doc 02: Indian security forces have shot dead eight suspected,"man, flight, reid, says",True,0.5731913232555906,1.0,0.6,0.1
+1,Doc 02: Indian security forces have shot dead eight suspected,"man, flight, reid, says",True,0.6039105493833604,1.0,0.8,0.2
+1,Doc 02: Indian security forces have shot dead eight suspected,"man, flight, reid, says",True,0.5836980923130001,1.2,0.8,0.2
+12,Doc 13: President General Pervez Musharraf says Pakistan wants to,"said, pakistan, palestinian, says",True,0.542290706233938,1.0,0.6,0.1
+12,Doc 13: President General Pervez Musharraf says Pakistan wants to,"said, pakistan, palestinian, says",True,0.5724954847251611,1.0,0.8,0.2
+12,Doc 13: President General Pervez Musharraf says Pakistan wants to,"said, pakistan, palestinian, says",True,0.55258199936343,1.2,0.8,0.2
+23,"Doc 24: Americans' fears about airplane security continue to increase,","man, flight, reid, says",False,0.24240070124703528,1.0,0.6,0.1
+23,"Doc 24: Americans' fears about airplane security continue to increase,","man, flight, reid, says",False,0.2761314363967363,1.0,0.8,0.2
+23,"Doc 24: Americans' fears about airplane security continue to increase,","man, flight, reid, says",False,0.253314993865187,1.2,0.8,0.2
+26,Doc 27: Pakistan's President Pervez Musharraf says he is ready,"said, pakistan, palestinian, says",True,0.2641772546217537,1.0,0.6,0.1
+26,Doc 27: Pakistan's President Pervez Musharraf says he is ready,"said, pakistan, palestinian, says",True,0.2819096392826669,1.0,0.8,0.2
+26,Doc 27: Pakistan's President Pervez Musharraf says he is ready,"said, pakistan, palestinian, says",True,0.2695790346830844,1.2,0.8,0.2
+34,Doc 35: Pakistan's Foreign Ministry has announced retaliatory sanctions against,"said, pakistan, palestinian, says",True,0.2822603412725154,1.0,0.6,0.1
+34,Doc 35: Pakistan's Foreign Ministry has announced retaliatory sanctions against,"said, pakistan, palestinian, says",True,0.29428029072427625,1.0,0.8,0.2
+34,Doc 35: Pakistan's Foreign Ministry has announced retaliatory sanctions against,"said, pakistan, palestinian, says",True,0.28630559534560607,1.2,0.8,0.2
