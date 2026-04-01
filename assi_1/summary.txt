@@ -1,6 +1,6 @@
 Assignment 5: Explore Non-Personalized Data and Features
 
-Source dataset: C:\Users\mansi\OneDrive\college\8_th_sem\lab\Recommender_system_lab\assignment_4\ratings_small.csv
+Source dataset: C:\Users\mansi\OneDrive\college\8_th_sem\lab\Recommender_system_lab\assi_4\ratings_small.csv
 Initial interactions: 1100
 Duplicates removed: 0
 Rows after filtering: 82

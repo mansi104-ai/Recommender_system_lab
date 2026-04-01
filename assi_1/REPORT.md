@@ -4,7 +4,7 @@
 Explore the ratings dataset to understand data quality, interaction structure, sparsity, inequality, and long-tail behavior relevant to recommender-system design.
 
 ## Preprocessing
-- Loaded `ratings_small.csv` from `assignment_4`.
+- Loaded `ratings_small.csv` from `assi_4`.
 - Removed duplicate rows.
 - Converted timestamps to datetime format.
 - Dropped rows with missing user, item, or rating values and filled missing timestamps with the earliest available timestamp.
@@ -25,7 +25,7 @@ Explore the ratings dataset to understand data quality, interaction structure, s
 - Long-tail split identifies 10 head items and 4 tail items using the 80% cumulative interaction rule.
 
 ## Output Files
-- `solve_assignment_5.py`: main solution script.
+- `solve_assignment_1.py`: main solution script.
 - `ratings_filtered_featured.csv`: cleaned and feature-engineered interaction data.
 - `groupwise_user_activity_summary.csv`: user-segment comparison table.
 - `groupwise_item_popularity_summary.csv`: item-segment comparison table.

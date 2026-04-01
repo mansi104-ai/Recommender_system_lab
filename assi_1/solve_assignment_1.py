@@ -11,7 +11,7 @@ import seaborn as sns
 
 
 BASE_DIR = Path(__file__).resolve().parent
-SOURCE_FILE = BASE_DIR.parent / "assignment_4" / "ratings_small.csv"
+SOURCE_FILE = BASE_DIR.parent / "assi_4" / "ratings_small.csv"
 MIN_USER_INTERACTIONS = 10
 MIN_ITEM_INTERACTIONS = 5
 
@@ -286,7 +286,7 @@ def save_outputs(
         "Explore the ratings dataset to understand data quality, interaction structure, sparsity, inequality, and long-tail behavior relevant to recommender-system design.",
         "",
         "## Preprocessing",
-        f"- Loaded `{SOURCE_FILE.name}` from `assignment_4`.",
+        f"- Loaded `{SOURCE_FILE.name}` from `assi_4`.",
         "- Removed duplicate rows.",
         "- Converted timestamps to datetime format.",
         "- Dropped rows with missing user, item, or rating values and filled missing timestamps with the earliest available timestamp.",
@@ -307,7 +307,7 @@ def save_outputs(
         f"- Long-tail split identifies {int((long_tail_df['long_tail_group'] == 'Head').sum())} head items and {int((long_tail_df['long_tail_group'] == 'Tail').sum())} tail items using the 80% cumulative interaction rule.",
         "",
         "## Output Files",
-        "- `solve_assignment_5.py`: main solution script.",
+        "- `solve_assignment_1.py`: main solution script.",
         "- `ratings_filtered_featured.csv`: cleaned and feature-engineered interaction data.",
         "- `groupwise_user_activity_summary.csv`: user-segment comparison table.",
         "- `groupwise_item_popularity_summary.csv`: item-segment comparison table.",
