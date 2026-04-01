@@ -1,0 +1,13 @@
+Assignment 5: Explore Non-Personalized Data and Features
+
+Source dataset: C:\Users\mansi\OneDrive\college\8_th_sem\lab\Recommender_system_lab\assignment_4\ratings_small.csv
+Initial interactions: 1100
+Duplicates removed: 0
+Rows after filtering: 82
+Users after filtering: 11
+Items after filtering: 14
+Sparsity: 0.4675
+User activity Gini index: 0.2905
+Item popularity Gini index: 0.0976
+Head items: 10
+Tail items: 4
